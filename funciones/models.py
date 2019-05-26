@@ -16,7 +16,7 @@ class Funcion(models.Model):
     t_finproyeccion = models.TimeField('hora de finalizacion')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
     
 
     class Meta:
