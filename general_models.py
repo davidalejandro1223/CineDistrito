@@ -53,7 +53,7 @@ class EmpleadoMultiplex(models.Model):
 
 
 class Funcion(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     v_estado = models.CharField(max_length=50)
     d_proyeccion = models.DateField()
     fk_pelicula = models.ForeignKey('Pelicula', models.DO_NOTHING, db_column='fk_pelicula')
@@ -61,7 +61,7 @@ class Funcion(models.Model):
     t_finproyeccion = models.TimeField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'funcion'
 
 
