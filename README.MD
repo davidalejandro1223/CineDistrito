@@ -2,7 +2,7 @@
 ## Integrantes:
 + David Alejandro Aparicio Grandas - 20151020060
 + Andres Acosta Pulido - 
-+ Dwan Felipe Veloza -
++ Dwan Felipe Veloza - 20142020098
 + Esteban Elias Romero - 
 
 ## Instalacion
