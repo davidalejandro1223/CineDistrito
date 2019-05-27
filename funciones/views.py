@@ -10,6 +10,5 @@ class PeliculaViewSet(viewsets.ModelViewSet):
     serializer_class = PeliculaSerializer
 
 class FuncionViewSet(viewsets.ModelViewSet):
-    
     queryset = Funcion.objects.all()
     serializer_class = FuncionSerializer

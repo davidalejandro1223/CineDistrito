@@ -24,7 +24,7 @@ class Sala(models.Model):
     fk_multiplex = models.ForeignKey(Multiplex, on_delete=models.CASCADE, db_column='fk_multiplex')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
     
 
     class Meta:
@@ -40,7 +40,7 @@ class Silla(models.Model):
     fk_multiplex = models.ForeignKey(Multiplex, on_delete=models.CASCADE, db_column='fk_multiplex')
 
     def __str__(self):
-        return self.pk_numero
+        return str(self.pk_numero)
     
 
     class Meta:
