@@ -1,7 +1,7 @@
 # Cine distrito - Team ADEM
 ## Integrantes:
 + David Alejandro Aparicio Grandas - 20151020060
-+ Andres Acosta Pulido - 
++ Andres Acosta Pulido - 20142020111
 + Dwan Felipe Veloza - 20142020098
 + Esteban Elias Romero - 
 
