@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .models import Contrato
+from rest_framework import viewsets
+from .serializers import ContratoSerializer
 
-# Create your views here.
+class contratosViewSet(viewsets.ModelViewSet):
+    ueryset = Contrato.objects.all()
+    serializer_class = ContratoSerializer
