@@ -3,8 +3,10 @@ from django.db import models
 # Create your models here.
 
 class Funcion(models.Model):
-    id = models.IntegerField(primary_key=True)
-    v_estado = models.CharField('estado de la funcion', max_length=50)
+    estados = (('activa', 'Activa'),
+            ('inactiva', 'Inactiva'))
+
+    v_estado = models.CharField('estado de la funcion', max_length=50, choices=estados)
     d_proyeccion = models.DateField('dia de proyeccion')
     fk_pelicula = models.ForeignKey(
         'Pelicula', 
@@ -24,7 +26,6 @@ class Funcion(models.Model):
         db_table = 'funcion'
 
 class Pelicula(models.Model):
-    id = models.IntegerField(primary_key=True)
     v_nombre = models.CharField('nombre pelicula',max_length=150)
     i_duracion = models.IntegerField('duracion pelicula')
     tx_sinapsis = models.TextField('sinapsis pelicula')

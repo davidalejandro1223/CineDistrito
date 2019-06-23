@@ -23,6 +23,7 @@ class Contrato(models.Model):
     id = models.IntegerField(primary_key=True)
     v_tipocontrato = models.CharField(max_length=100)
     d_iniciocontrato = models.DateField()
+    d_fincontrato = models.DateField(blank=True, null=True)
     i_salario = models.IntegerField()
 
     class Meta:
@@ -34,7 +35,7 @@ class Empleado(models.Model):
     fk_persona = models.ForeignKey('Persona', models.DO_NOTHING, db_column='fk_persona', primary_key=True)
     fk_contrato = models.IntegerField()
     n_descuento = models.DecimalField(max_digits=4, decimal_places=2)
-    fk_numcontrato = models.ForeignKey(Contrato, models.DO_NOTHING, db_column='fk_numcontrato', blank=True, null=True)
+    fk_numcontrato = models.ForeignKey(Contrato, models.DO_NOTHING, db_column='fk_numcontrato')
 
     class Meta:
         managed = False
@@ -42,7 +43,6 @@ class Empleado(models.Model):
 
 
 class EmpleadoMultiplex(models.Model):
-    id = models.IntegerField(primary_key=True)
     fk_empleado = models.ForeignKey(Empleado, models.DO_NOTHING, db_column='fk_empleado')
     fk_multiplex = models.ForeignKey('Multiplex', models.DO_NOTHING, db_column='fk_multiplex')
     f_transferencia = models.DateTimeField()
@@ -53,7 +53,6 @@ class EmpleadoMultiplex(models.Model):
 
 
 class Funcion(models.Model):
-    id = models.AutoField(primary_key=True)
     v_estado = models.CharField(max_length=50)
     d_proyeccion = models.DateField()
     fk_pelicula = models.ForeignKey('Pelicula', models.DO_NOTHING, db_column='fk_pelicula')
@@ -61,12 +60,21 @@ class Funcion(models.Model):
     t_finproyeccion = models.TimeField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'funcion'
 
 
+class FuncionSala(models.Model):
+    fk_funcion = models.ForeignKey(Funcion, models.DO_NOTHING, db_column='fk_funcion')
+    fk_sala = models.ForeignKey('Sala', models.DO_NOTHING, db_column='fk_sala')
+
+    class Meta:
+        managed = False
+        db_table = 'funcion_sala'
+        unique_together = (('fk_funcion', 'fk_sala'),)
+
+
 class Multiplex(models.Model):
-    id = models.IntegerField(primary_key=True)
     v_nombre = models.CharField(max_length=100)
     v_direccion = models.CharField(max_length=100)
     v_ciudad = models.CharField(max_length=100)
@@ -79,7 +87,7 @@ class Multiplex(models.Model):
 
 
 class Pago(models.Model):
-    pk_numpago = models.IntegerField(primary_key=True)
+    pk_numpago = models.AutoField(primary_key=True)
     t_fechapago = models.DateTimeField()
     i_subtotalpago = models.IntegerField()
     i_totalpago = models.IntegerField()
@@ -94,7 +102,6 @@ class Pago(models.Model):
 
 
 class Pelicula(models.Model):
-    id = models.IntegerField(primary_key=True)
     v_nombre = models.CharField(max_length=150)
     i_duracion = models.IntegerField()
     tx_sinapsis = models.TextField()
@@ -120,7 +127,6 @@ class Persona(models.Model):
 
 
 class Reserva(models.Model):
-    id = models.IntegerField(primary_key=True)
     v_estado = models.CharField(max_length=50)
     t_inicioreserva = models.TimeField()
     fk_persona = models.ForeignKey(Persona, models.DO_NOTHING, db_column='fk_persona')
@@ -131,7 +137,7 @@ class Reserva(models.Model):
 
 
 class Sala(models.Model):
-    id = models.IntegerField(primary_key=True)
+    i_numsala = models.IntegerField()
     i_numpreferencial = models.IntegerField()
     i_numgeneral = models.IntegerField()
     fk_multiplex = models.ForeignKey(Multiplex, models.DO_NOTHING, db_column='fk_multiplex')
@@ -139,34 +145,30 @@ class Sala(models.Model):
     class Meta:
         managed = False
         db_table = 'sala'
-        unique_together = (('id', 'fk_multiplex'),)
+        unique_together = (('fk_multiplex', 'i_numsala'),)
 
 
 class Silla(models.Model):
-    pk_numero = models.CharField(primary_key=True, max_length=3)
+    pk_numero = models.CharField(max_length=3)
     fk_sala = models.ForeignKey(Sala, models.DO_NOTHING, db_column='fk_sala')
     v_tipo = models.CharField(max_length=50)
     i_orden = models.CharField(max_length=50)
-    fk_multiplex = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'silla'
-        unique_together = (('pk_numero', 'fk_sala', 'fk_multiplex'),)
+        unique_together = (('pk_numero', 'fk_sala'),)
 
 
-class SillaFuncion(models.Model):
-    id = models.IntegerField(primary_key=True)
+class SillaReservada(models.Model):
     v_estado = models.CharField(max_length=50)
     fk_silla = models.ForeignKey(Silla, models.DO_NOTHING, db_column='fk_silla')
-    fk_funcion = models.ForeignKey(Funcion, models.DO_NOTHING, db_column='fk_funcion')
-    fk_sala = models.IntegerField()
-    fk_multiplex = models.IntegerField()
-    fk_reserva = models.ForeignKey(Reserva, models.DO_NOTHING, db_column='fk_reserva', blank=True, null=True)
+    fk_funcion_sala = models.ForeignKey(FuncionSala, models.DO_NOTHING, db_column='fk_funcion_sala')
+    fk_reserva = models.ForeignKey(Reserva, models.DO_NOTHING, db_column='fk_reserva')
 
     class Meta:
         managed = False
-        db_table = 'silla_funcion'
+        db_table = 'silla_reservada'
 
 
 class Snack(models.Model):
@@ -184,10 +186,9 @@ class Snack(models.Model):
 
 class SnackReserva(models.Model):
     fk_reserva = models.ForeignKey(Reserva, models.DO_NOTHING, db_column='fk_reserva')
-    fk_snack = models.ForeignKey(Snack, models.DO_NOTHING, db_column='fk_snack', primary_key=True)
+    fk_snack = models.ForeignKey(Snack, models.DO_NOTHING, db_column='fk_snack')
     i_cantidad = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'snack_reserva'
-        unique_together = (('fk_snack', 'fk_reserva'),)

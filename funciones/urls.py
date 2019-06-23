@@ -10,9 +10,3 @@ router.register(r'funciones/funciones', FuncionViewSet, basename="funciones")
 
 urlpatterns = router.urls
 
-"""
-urlpatterns = [
-    path('funciones/peliculas', PeliculaViewSet.as_view({'get':'list', 'post':'create'}), name='PeliculaViewSet'),
-    path('funciones/funciones', FuncionViewSet.as_view({'get':'list', 'post':'create'}), name='FuncionViewSet'),
-] """
-

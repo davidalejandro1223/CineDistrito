@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Multiplex, Sala, Silla
 
-class MultiplexSerializer(serializers.HyperlinkedModelSerializer):
+class MultiplexSerializer(serializers.ModelSerializer):
     class Meta:
         model = Multiplex
         fields = (
@@ -13,26 +13,46 @@ class MultiplexSerializer(serializers.HyperlinkedModelSerializer):
             'i_maxsalas'
         )
 
-class SalaSerializer(serializers.HyperlinkedModelSerializer):
+
+class SalaGetSerializer(serializers.ModelSerializer):
     fk_multiplex = MultiplexSerializer()
     class Meta:
         model = Sala
         fields = (
             'id',
+            'i_numsala',
             'i_numpreferencial',
             'i_numgeneral',
             'fk_multiplex'
         )
 
-class SillaSerializer(serializers.HyperlinkedModelSerializer):
-    fk_sala = SalaSerializer()
-    fk_multiplex = MultiplexSerializer()
+class SalaPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sala
+        fields = (
+            'i_numsala',
+            'i_numpreferencial',
+            'i_numgeneral',
+            'fk_multiplex'
+        )
+
+class SillaGetSerializer(serializers.ModelSerializer):
+    fk_sala = SalaGetSerializer()
     class Meta:
         model = Silla
         fields = (
             'pk_numero',
             'fk_sala',
-            'v_tipo'
+            'v_tipo',
             'i_orden',
-            'fk_multiplex'
+        )
+
+class SillaPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Silla
+        fields = (
+            'pk_numero',
+            'fk_sala',
+            'v_tipo',
+            'i_orden',
         )

@@ -9,7 +9,7 @@ class PeliculaSerializer(serializers.ModelSerializer):
 class FuncionPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Funcion
-        fields = ('id', 'v_estado', 'd_proyeccion', 'fk_pelicula', 't_inicioproyeccion', 't_finproyeccion')
+        fields = ('v_estado', 'd_proyeccion', 'fk_pelicula', 't_inicioproyeccion', 't_finproyeccion')
 
 class FuncionGetSerializer(serializers.ModelSerializer):
     fk_pelicula = PeliculaSerializer()

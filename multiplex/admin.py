@@ -10,11 +10,11 @@ class MultiplexAdmin(admin.ModelAdmin):
 
 @admin.register(Sala)
 class SalaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'fk_multiplex')
+    list_display = ('id', 'i_numsala','fk_multiplex')
 
 @admin.register(Silla)
 class SillaAdmin(admin.ModelAdmin):
-    list_display = ('pk_numero', 'fk_sala', 'fk_multiplex')
+    list_display = ('id','pk_numero', 'fk_sala')
 
 
 
