@@ -23,7 +23,7 @@
 ## Ejecucion
 Estando ubicado en la carpeta del proyecto solo basta ejecutar el siguiente comando para iniciar el servidor de desarrollo y el proyecto:
 
-    `python manage.py runsever`
+    `python manage.py runserver`
 
 el servidor se ejecutará por defecto en localhost:8000
 
