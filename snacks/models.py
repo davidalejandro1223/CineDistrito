@@ -10,5 +10,5 @@ class Snack(models.Model):
     i_puntosofrecidos = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'snack'

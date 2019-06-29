@@ -11,7 +11,7 @@ class Reserva(models.Model):
     fk_persona = models.ForeignKey(Persona, models.DO_NOTHING, db_column='fk_persona')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'reserva'
 
 class SillaReservada(models.Model):
@@ -23,7 +23,7 @@ class SillaReservada(models.Model):
     fk_reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, db_column='fk_reserva')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'silla_reservada'
 
 class SnackReserva(models.Model):
@@ -32,7 +32,7 @@ class SnackReserva(models.Model):
     i_cantidad = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'snack_reserva'
 
 class Pago(models.Model):
@@ -46,5 +46,5 @@ class Pago(models.Model):
     fk_reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE, db_column='fk_reserva', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pago'

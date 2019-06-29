@@ -10,7 +10,7 @@ class Contrato(models.Model):
     i_salario = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'contrato'
 
 class Empleado(models.Model):
@@ -20,7 +20,7 @@ class Empleado(models.Model):
     fk_numcontrato = models.ForeignKey(Contrato, on_delete=models.CASCADE, db_column='fk_numcontrato')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'empleado'
 
 class EmpleadoMultiplex(models.Model):
@@ -29,5 +29,5 @@ class EmpleadoMultiplex(models.Model):
     f_transferencia = models.DateTimeField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'empleado_multiplex'

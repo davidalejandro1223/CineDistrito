@@ -14,7 +14,7 @@ class Multiplex(models.Model):
 
     class Meta:
         db_table = 'multiplex'
-        managed = False
+        managed = True
 
 class Sala(models.Model):
     i_numsala = models.IntegerField()
@@ -27,7 +27,7 @@ class Sala(models.Model):
     
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'sala'
         unique_together = (('i_numsala', 'fk_multiplex'),)
     
@@ -45,6 +45,6 @@ class Silla(models.Model):
     
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'silla'
         unique_together = (('pk_numero', 'fk_sala'),)

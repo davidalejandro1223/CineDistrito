@@ -22,7 +22,7 @@ class Funcion(models.Model):
     
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'funcion'
 
 class Pelicula(models.Model):
@@ -36,7 +36,7 @@ class Pelicula(models.Model):
     
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pelicula'
 
 class FuncionSala(models.Model):
@@ -44,7 +44,7 @@ class FuncionSala(models.Model):
     fk_sala = models.ForeignKey(Sala, on_delete=models.CASCADE, db_column='fk_sala')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'funcion_sala'
         unique_together = (('fk_funcion', 'fk_sala'),)
     
