@@ -8,11 +8,14 @@ from snacks.models import Snack
 class Reserva(models.Model):
     v_estado = models.CharField(max_length=50)
     t_inicioreserva = models.TimeField()
-    fk_persona = models.ForeignKey(Persona, models.DO_NOTHING, db_column='fk_persona')
+    fk_persona = models.ForeignKey(Persona, on_delete=models.CASCADE, db_column='fk_persona')
 
     class Meta:
         managed = True
         db_table = 'reserva'
+
+    def __str__(self):
+        return str(self.id)
 
 class SillaReservada(models.Model):
     estados = (('proceso', 'En proceso'), 
@@ -25,6 +28,9 @@ class SillaReservada(models.Model):
     class Meta:
         managed = True
         db_table = 'silla_reservada'
+    
+    def __str__(self):
+        return str(self.id) + '-' +  self.fk_reserva
 
 class SnackReserva(models.Model):
     fk_reserva = models.ForeignKey(Reserva, models.DO_NOTHING, db_column='fk_reserva')
@@ -34,6 +40,9 @@ class SnackReserva(models.Model):
     class Meta:
         managed = True
         db_table = 'snack_reserva'
+    
+    def __str__(self):
+        return str(self.id) + '-' +  self.fk_reserva
 
 class Pago(models.Model):
     pk_numpago = models.AutoField(primary_key=True)
@@ -48,3 +57,6 @@ class Pago(models.Model):
     class Meta:
         managed = True
         db_table = 'pago'
+
+    def __str__(self):
+        return str(self.pk_numpago) + '-' +  self.fk_reserva

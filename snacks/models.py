@@ -12,3 +12,6 @@ class Snack(models.Model):
     class Meta:
         managed = True
         db_table = 'snack'
+    
+    def __str__(self):
+        return str(self.id)+'-'+self.v_nombre
