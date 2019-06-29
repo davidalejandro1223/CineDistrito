@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Pelicula, Funcion
+from .models import Pelicula, Funcion, FuncionSala
 from rest_framework import viewsets
-from .serializers import PeliculaSerializer, FuncionGetSerializer, FuncionPostSerializer
+from .serializers import *
 
 # Create your views here.
 
@@ -18,3 +18,12 @@ class FuncionViewSet(viewsets.ModelViewSet):
             return FuncionPostSerializer
         elif self.request.method == 'GET':
             return FuncionGetSerializer
+
+class FuncionSalaViewSet(viewsets.ModelViewSet):
+    queryset = FuncionSala.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return FuncionSalaPostSerializer
+        elif self.request.method == 'GET':
+            return FuncionSalaGetSerializer

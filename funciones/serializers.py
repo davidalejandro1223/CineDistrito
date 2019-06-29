@@ -1,5 +1,6 @@
-from .models import Pelicula, Funcion
+from .models import Pelicula, Funcion, FuncionSala
 from rest_framework import serializers
+from multiplex.serializers import SalaGetSerializer
 
 class PeliculaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +17,16 @@ class FuncionGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Funcion
         fields = ('id', 'v_estado', 'd_proyeccion', 'fk_pelicula', 't_inicioproyeccion', 't_finproyeccion')
+
+class FuncionSalaGetSerializer(serializers.ModelSerializer):
+    fk_funcion = FuncionGetSerializer()
+    fk_sala = SalaGetSerializer()
+
+    class Meta:
+        model = FuncionSala
+        fields = '__all__'
+
+class FuncionSalaPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FuncionSala
+        fields = '__all__'

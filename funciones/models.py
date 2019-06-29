@@ -1,5 +1,5 @@
 from django.db import models
-
+from multiplex.models import Sala
 # Create your models here.
 
 class Funcion(models.Model):
@@ -38,3 +38,12 @@ class Pelicula(models.Model):
     class Meta:
         managed = False
         db_table = 'pelicula'
+
+class FuncionSala(models.Model):
+    fk_funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE, db_column='fk_funcion')
+    fk_sala = models.ForeignKey(Sala, on_delete=models.CASCADE, db_column='fk_sala')
+
+    class Meta:
+        managed = False
+        db_table = 'funcion_sala'
+        unique_together = (('fk_funcion', 'fk_sala'),)

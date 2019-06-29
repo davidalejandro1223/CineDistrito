@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'funciones.apps.FuncionesConfig',
     'multiplex.apps.MultiplexConfig',
     'empleados.apps.EmpleadosConfig',
+    'reservas.apps.ReservasConfig',
+    'snacks.apps.SnacksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +141,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+AUTH_USER_MODEL = 'usuarios.Persona'
+
