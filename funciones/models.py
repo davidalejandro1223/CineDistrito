@@ -18,7 +18,7 @@ class Funcion(models.Model):
     t_finproyeccion = models.TimeField('hora de finalizacion')
 
     def __str__(self):
-        return str(self.id)
+        return str(self.id)+'-'+self.fk_pelicula.v_nombre
     
 
     class Meta:
@@ -47,3 +47,6 @@ class FuncionSala(models.Model):
         managed = False
         db_table = 'funcion_sala'
         unique_together = (('fk_funcion', 'fk_sala'),)
+    
+    def __str__(self):
+        return self.fk_funcion.id + self.fk_sala
