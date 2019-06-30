@@ -10,4 +10,3 @@ router.register(r'funciones/funciones', FuncionViewSet, basename="funciones")
 router.register(r'funciones/funciones-sala', FuncionSalaViewSet, base_name="funcion-sala")
 
 urlpatterns = router.urls
-

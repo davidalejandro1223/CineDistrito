@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('funciones.urls', namespace='funciones')),
     path('api/v1/', include('multiplex.urls', namespace='multiplex')),
-    path('api/v1/', include('empleados.urls', namespace='contrato')),
+    path('api/v1/', include('empleados.urls', namespace='empleados')),
+    path('api/v1/', include('usuarios.urls', namespace='usuarios')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
