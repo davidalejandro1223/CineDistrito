@@ -19,7 +19,6 @@ class Contrato(models.Model):
 
 class Empleado(models.Model):
     fk_persona = models.OneToOneField(Persona, on_delete=models.CASCADE, db_column='fk_persona', primary_key=True)
-    fk_contrato = models.IntegerField()
     n_descuento = models.DecimalField(max_digits=4, decimal_places=2)
     fk_numcontrato = models.ForeignKey(Contrato, on_delete=models.CASCADE, db_column='fk_numcontrato')
 
@@ -28,7 +27,7 @@ class Empleado(models.Model):
         db_table = 'empleado'
     
     def __str__(self):
-        return self.fk_persona.pk_cedula + '-' + self.fk_persona.v_primernombre + '-' + self.fk_persona.v_primernombre
+        return str(self.fk_persona.pk_cedula + '-' + self.fk_persona.v_primernombre + '-' + self.fk_persona.v_primernombre)
     
 
 class EmpleadoMultiplex(models.Model):
