@@ -27,7 +27,7 @@ class Empleado(models.Model):
         db_table = 'empleado'
     
     def __str__(self):
-        return str(self.fk_persona.pk_cedula + '-' + self.fk_persona.v_primernombre + '-' + self.fk_persona.v_primernombre)
+        return str(self.fk_persona.pk_cedula) + '-' + self.fk_persona.v_primernombre + '-' + self.fk_persona.v_primernombre
     
 
 class EmpleadoMultiplex(models.Model):
