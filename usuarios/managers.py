@@ -12,8 +12,7 @@ class PersonaManager(UserManager):
             username=username, 
             pk_cedula=pk_cedula, 
             i_telefono=i_telefono, 
-            v_direccion=v_direccion, 
-            password=password,
+            v_direccion=v_direccion,
             first_name=first_name,
             last_name=last_name,
             is_staff = False,
@@ -27,7 +26,6 @@ class PersonaManager(UserManager):
     def create_staffuser(self, email, cedula, password):
         user = self.create_user(
             cedula = cedula,
-            password=password
         )
         user.staf = True
         user.save(using=self._db)
