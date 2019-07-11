@@ -49,4 +49,4 @@ class FuncionSala(models.Model):
         unique_together = (('fk_funcion', 'fk_sala'),)
     
     def __str__(self):
-        return self.fk_funcion.id + self.fk_sala
+        return str(self.fk_funcion) + str(self.fk_sala)

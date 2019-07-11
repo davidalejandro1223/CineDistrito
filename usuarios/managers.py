@@ -23,9 +23,16 @@ class PersonaManager(UserManager):
         user.save(using=self._db)
         return user
     
-    def create_staffuser(self, email, cedula, password):
+    def create_staffuser(self, email,username, pk_cedula, i_telefono, v_direccion, first_name, last_name, password):
         user = self.create_user(
-            cedula = cedula,
+            email=email, 
+            username=username, 
+            pk_cedula=pk_cedula, 
+            i_telefono=i_telefono, 
+            v_direccion=v_direccion,
+            first_name=first_name,
+            last_name=last_name,
+            password=password,
         )
         user.staf = True
         user.save(using=self._db)
@@ -38,9 +45,9 @@ class PersonaManager(UserManager):
             pk_cedula = pk_cedula,
             i_telefono = 00000,
             v_direccion = 'superuser no aplica',
-            is_staff = True,
-            is_superuser = True,
         )
+        user.is_staff = True
+        user.is_superuser = True
         user.set_password(password)
         user.save(using=self._db)
         return user
