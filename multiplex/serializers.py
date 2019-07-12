@@ -41,6 +41,7 @@ class SillaGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Silla
         fields = (
+            'id',
             'pk_numero',
             'fk_sala',
             'v_tipo',
@@ -51,6 +52,7 @@ class SillaPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Silla
         fields = (
+            'id',
             'pk_numero',
             'fk_sala',
             'v_tipo',

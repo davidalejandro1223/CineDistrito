@@ -1,5 +1,4 @@
 from .models import Pelicula, Funcion, FuncionSala
-from multiplex.models import Multiplex
 from rest_framework import serializers
 from multiplex.serializers import SalaGetSerializer
 
@@ -31,8 +30,3 @@ class FuncionSalaPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = FuncionSala
         fields = '__all__'
-
-class MultiplexPeliculas(serializers.ModelSerializer):
-    class Meta:
-        model = Multiplex
-        fields = ('id','v_nombre',)

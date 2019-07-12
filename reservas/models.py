@@ -22,7 +22,7 @@ class SillaReservada(models.Model):
                 ('reservada', 'Reservada'))
     v_estado = models.CharField(max_length=50, choices=estados)
     fk_silla = models.ForeignKey(Silla, on_delete=models.CASCADE, db_column='fk_silla')
-    fk_funcion_sala = models.ForeignKey(FuncionSala, on_delete=models.CASCADE, db_column='fk_funcion_sala')
+    fk_funcion_sala = models.ForeignKey(FuncionSala, on_delete=models.CASCADE, db_column='fk_funcion_sala', related_name='funsalas')
     fk_reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, db_column='fk_reserva')
 
     class Meta:
@@ -30,11 +30,11 @@ class SillaReservada(models.Model):
         db_table = 'silla_reservada'
     
     def __str__(self):
-        return str(self.id) + '-' +  self.fk_reserva
+        return str(self.fk_silla) + '-' +  str(self.fk_reserva)
 
 class SnackReserva(models.Model):
-    fk_reserva = models.ForeignKey(Reserva, models.DO_NOTHING, db_column='fk_reserva')
-    fk_snack = models.ForeignKey(Snack, models.DO_NOTHING, db_column='fk_snack')
+    fk_reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, db_column='fk_reserva')
+    fk_snack = models.ForeignKey(Snack, on_delete=models.CASCADE, db_column='fk_snack')
     i_cantidad = models.IntegerField()
 
     class Meta:
