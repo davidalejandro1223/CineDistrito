@@ -2,11 +2,12 @@ from django.shortcuts import render
 from multiplex.models import Silla
 from multiplex.serializers import SillaGetSerializer
 from funciones.models import FuncionSala
-from .models import SillaReservada
-from .serializers import SillaReservadaSerializer
+from .models import SillaReservada, SnackReserva
+from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 # Create your views here.
 
 class DisponibilidadSillas(APIView):
@@ -23,3 +24,13 @@ class DisponibilidadSillas(APIView):
         serializer_dis = SillaGetSerializer(sillas_dis, many=True)
         
         return Response({'reservadas':serializer_res.data, 'proceso':serializer_prcs.data, 'disponible':serializer_dis.data})
+
+
+class SnackReservaViewSet(ModelViewSet):
+    queryset = SnackReserva.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return SnackReservaGetSerializer
+        elif self.request.method == 'POST':
+            return SnackReservaPostSerializer
