@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DisponibilidadSillas, SnackReservaViewSet
+from .views import *
 from rest_framework.routers import DefaultRouter
 
 app_name = 'Reservas'
@@ -10,4 +10,5 @@ router.register(r'reservas/snack-reserva', SnackReservaViewSet, base_name='snack
 
 urlpatterns = [
     path('reservas/disponibilidad-sillas/<int:pk_funcion>/<int:pk_sala>/', DisponibilidadSillas.as_view(), name='disponibilidad-sillas'),
+    path('reservas/seleccion-silla', SeleccionSilla.as_view(), name='seleccion-silla')
 ]+router.urls

@@ -11,7 +11,6 @@ class Multiplex(models.Model):
     def __str__(self):
         return self.v_nombre
     
-
     class Meta:
         db_table = 'multiplex'
         managed = True

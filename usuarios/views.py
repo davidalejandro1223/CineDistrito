@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Persona, Cliente
 from .serializers import PersonaSerializer, BasicCreateClienteSerializer, BasicListClienteSerializer
 from rest_framework.viewsets import ModelViewSet
@@ -20,3 +22,9 @@ class ClienteViewSet(ModelViewSet):
             return BasicCreateClienteSerializer
         if self.request.method == 'GET':
             return BasicListClienteSerializer
+
+class Autenticar(APIView):
+    permission_classes = (IsAuthenticated,)
+    
+    def post(self, request):
+        return Response('Se ha autenticado con exito')

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SillaReservada, SnackReserva
+from .models import SillaReservada, SnackReserva, Reserva, Pago
 from multiplex.serializers import SillaGetSerializer
 from snacks.serializers import SnackSerializer
 
@@ -18,4 +18,9 @@ class SnackReservaGetSerializer(serializers.ModelSerializer):
 class SnackReservaPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = SnackReserva
+        fields = '__all__'
+
+class ReservaGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reserva
         fields = '__all__'

@@ -7,7 +7,7 @@ from snacks.models import Snack
 
 class Reserva(models.Model):
     v_estado = models.CharField(max_length=50)
-    t_inicioreserva = models.TimeField()
+    t_inicioreserva = models.TimeField(auto_now=True)
     fk_persona = models.ForeignKey(Persona, on_delete=models.CASCADE, db_column='fk_persona')
 
     class Meta:
