@@ -20,7 +20,7 @@ class DisponibilidadSillas(APIView):
         sillas_sala = Silla.objects.filter(fk_sala=pk_sala)
         funcion_sala = FuncionSala.objects.filter(fk_sala=pk_sala).get(fk_funcion=pk_funcion)
         sillas_res = funcion_sala.funsalas.all().filter(v_estado='reservada')
-        sillas_prcs = funcion_sala.funsalas.all().filter(v_estado='proceso')
+        sillas_prcs = funcion_sala.funsalas.all().filter(v_estado='en proceso')
         sillas_dis = sillas_sala.exclude(id__in=sillas_res.values('fk_silla')).exclude(id__in=sillas_prcs.values('fk_silla'))
         serializer_res = SillaReservadaSerializer(sillas_res, many=True)
         serializer_prcs = SillaReservadaSerializer(sillas_prcs, many=True)
