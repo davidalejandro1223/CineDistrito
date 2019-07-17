@@ -10,5 +10,5 @@ router.register(r'reservas/snack-reserva', SnackReservaViewSet, base_name='snack
 
 urlpatterns = [
     path('reservas/disponibilidad-sillas/<int:pk_funcion>/<int:pk_sala>/', DisponibilidadSillas.as_view(), name='disponibilidad-sillas'),
-    path('reservas/factura/<int:pk_reserva>', Factura.as_view, name='factura'),
+    path('reservas/factura/<int:pk_reserva>', Factura.as_view(), name='factura'),
 ]+router.urls

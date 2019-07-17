@@ -29,7 +29,7 @@ class DisponibilidadSillas(APIView):
         try:
             ultima_reserva_usuario = Reserva.objects.filter(
                 fk_persona=request.user
-                ).order_by('-t_inicioreserva')[0]
+            ).order_by('-t_inicioreserva')[0]
 
             tiempo_limite = ultima_reserva_usuario.t_inicioreserva + datetime.timedelta(minutes=5)
 
@@ -37,9 +37,9 @@ class DisponibilidadSillas(APIView):
                 reserva = ultima_reserva_usuario
             else:
                 reserva = Reserva(
-                v_estado='en proceso',
-                fk_persona=request.user,
-                t_inicioreserva = timezone.now().strftime("%Y-%m-%d %H:%M")
+                    v_estado='en proceso',
+                    fk_persona=request.user,
+                    t_inicioreserva = timezone.now().strftime("%Y-%m-%d %H:%M")
                 )
                 reserva.save()
                 if ultima_reserva_usuario.v_estado == 'en proceso':
@@ -64,7 +64,7 @@ class DisponibilidadSillas(APIView):
             'fk_funcion_sala':funcion_sala.id
             })
 
-    def post(self, request, format=None):
+    def post(self, request, pk_sala, pk_funcion, format=None):
         reserva = Reserva.objects.get(id=request.data['fk_reserva'])
         funcion_sala = FuncionSala.objects.get(id=request.data['fk_funcion_sala'])
         silla = Silla.objects.get(id=request.data['fk_silla'])
@@ -120,7 +120,7 @@ class SnackReservaViewSet(ModelViewSet):
             return SnackReservaPostSerializer
 
 class Factura(APIView):
-    def post(self, request, pk_reserva):
+    def get(self, request, pk_reserva):
         boletas = SillaReservada.objects.filter(fk_reserva=pk_reserva)
         snacks = SnackReserva.objects.filter(fk_reserva=pk_reserva)
         
