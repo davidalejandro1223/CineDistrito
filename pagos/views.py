@@ -27,7 +27,7 @@ class Factura(APIView):
         total = subtotal+iva
         return Response({
             'precio_general':precio_general,
-            'precio_preferencial':precio_general,
+            'precio_preferencial':precio_preferencial,
             'precio_snacks':precio_snacks,
             'subtotal':subtotal,
             'iva':iva,

@@ -39,7 +39,7 @@ class DisponibilidadSillas(APIView):
                 reserva = Reserva(
                     v_estado='en proceso',
                     fk_persona=request.user,
-                    t_inicioreserva = timezone.now().strftime("%Y-%m-%d %H:%M")
+                    t_inicioreserva = timezone.now()
                 )
                 reserva.save()
                 if ultima_reserva_usuario.v_estado == 'en proceso':
@@ -106,7 +106,7 @@ class DisponibilidadSillas(APIView):
             else:
                 return Response('El tiempo para terminar la reserva ha finalizado')
         except:
-            return('No tiene ninguna reserva')
+            return Response('No tiene ninguna reserva')
 
 
 class SnackReservaViewSet(ModelViewSet):
