@@ -1,6 +1,7 @@
 from django.db import models
 from usuarios.models import Persona
 from multiplex.models import Multiplex
+from .managers import EmpleadoManager
 
 # Create your models here.
 class Contrato(models.Model):
@@ -21,6 +22,8 @@ class Empleado(models.Model):
     fk_persona = models.OneToOneField(Persona, on_delete=models.CASCADE, db_column='fk_persona', primary_key=True)
     n_descuento = models.DecimalField(max_digits=4, decimal_places=2)
     fk_numcontrato = models.ForeignKey(Contrato, on_delete=models.CASCADE, db_column='fk_numcontrato')
+
+    objects = EmpleadoManager(Persona)
 
     class Meta:
         managed = True

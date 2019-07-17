@@ -26,5 +26,6 @@ urlpatterns = [
     path('api/v1/', include('usuarios.urls', namespace='usuarios')),
     path('api/v1/', include('reservas.urls', namespace='reservas')),
     path('api/v1/', include('snacks.urls', namespace='snacks')),
+    path('api/v1/', include('pagos.urls', namespace='pagos')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

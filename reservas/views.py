@@ -32,7 +32,7 @@ class DisponibilidadSillas(APIView):
             ).order_by('-t_inicioreserva')[0]
 
             tiempo_limite = ultima_reserva_usuario.t_inicioreserva + datetime.timedelta(minutes=5)
-
+            ahora = timezone.now()
             if tiempo_limite > timezone.now():
                 reserva = ultima_reserva_usuario
             else:
@@ -50,10 +50,9 @@ class DisponibilidadSillas(APIView):
             reserva = Reserva(
                 v_estado='en proceso',
                 fk_persona=request.user,
-                t_inicioreserva = timezone.now().strftime("%Y-%m-%d %H:%M")
+                t_inicioreserva = timezone.now()
             )
             reserva.save()
-        print(reserva.t_inicioreserva)
         serializer_reserva = ReservaGetSerializer(reserva)
 
         return Response({
@@ -75,7 +74,7 @@ class DisponibilidadSillas(APIView):
                 ).order_by('-t_inicioreserva')[0]
 
             tiempo_limite = ultima_reserva_usuario.t_inicioreserva + datetime.timedelta(minutes=5)
-
+            print('tiempo limite:{} \n tiempo ultreserva:{}'.format(tiempo_limite, timezone.now()))
             if tiempo_limite > timezone.now():
                 try:
                     silla_reservada = SillaReservada.objects.filter(
@@ -118,25 +117,3 @@ class SnackReservaViewSet(ModelViewSet):
             return SnackReservaGetSerializer
         elif self.request.method == 'POST':
             return SnackReservaPostSerializer
-
-class Factura(APIView):
-    def get(self, request, pk_reserva):
-        boletas = SillaReservada.objects.filter(fk_reserva=pk_reserva)
-        snacks = SnackReserva.objects.filter(fk_reserva=pk_reserva)
-        
-        precio_general = 0
-        precio_preferencial = 0
-        precio_snacks = 0
-
-        for boleta in boletas:
-            if boleta.fk_silla.v_tipo == 'general':
-                precio_general = precio_general+11000
-            elif boleta.fk_silla.v_tipo == 'preferencial':
-                precio_preferencial = precio_preferencial+15000
-        
-        for snack in snacks:
-            precio_snacks = precio_snacks+(snack.i_cantidad*snack.fk_snack.i_precio)
-        
-        print('el precio general es {}, el precio preferencial es {}, el precio snacks es {}'.format(precio_general, precio_preferencial, precio_snacks))
-
-        return Response('el precio general es {}, el precio preferencial es {}, el precio snacks es {}'.format(precio_general, precio_preferencial, precio_snacks))

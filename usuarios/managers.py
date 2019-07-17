@@ -73,7 +73,7 @@ class ClienteManager(models.Manager):
         cliente = self.model(
             fk_persona=persona,
             i_numpuntos = 0,
-            i_numtarjeta = randint(1000000, 10000000),
+            i_numtarjeta = randint(1000000, 1000000000),
             d_fechapuntos = None
         )
         cliente.save()
