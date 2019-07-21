@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Reserva, SillaReservada, SnackReserva, Pago
+from .models import Reserva, SillaReservada, SnackReserva
 # Register your models here.
 
 @admin.register(Reserva)
@@ -13,7 +13,3 @@ class SillaReservadaAdmin(admin.ModelAdmin):
 @admin.register(SnackReserva)
 class SnackReservaAdmin(admin.ModelAdmin):
     list_display = ('id', 'fk_reserva', 'fk_snack', 'i_cantidad')
-
-@admin.register(Pago)
-class PagoAdmin(admin.ModelAdmin):
-    list_display = ('pk_numpago', 'fk_cliente', 'fk_reserva', 't_fechapago', 'i_totalpago')

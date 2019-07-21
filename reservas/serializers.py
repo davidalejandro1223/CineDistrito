@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SillaReservada, SnackReserva, Reserva, Pago
+from .models import SillaReservada, SnackReserva, Reserva
 from multiplex.serializers import SillaGetSerializer
 from snacks.serializers import SnackSerializer
 

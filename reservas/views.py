@@ -2,7 +2,7 @@ from django.shortcuts import render
 from multiplex.models import Silla
 from multiplex.serializers import SillaGetSerializer
 from funciones.models import FuncionSala
-from .models import SillaReservada, SnackReserva, Reserva, Pago
+from .models import SillaReservada, SnackReserva, Reserva
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response

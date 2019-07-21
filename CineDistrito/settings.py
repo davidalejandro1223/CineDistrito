@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'empleados.apps.EmpleadosConfig',
     'reservas.apps.ReservasConfig',
     'snacks.apps.SnacksConfig',
+    'pagos.apps.PagosConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
