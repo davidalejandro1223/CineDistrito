@@ -91,7 +91,7 @@ class DisponibilidadSillas(APIView):
                 if silla_reservada:
                     if request.user == reserva.fk_persona:
                         silla_reservada.delete()
-                        return Response('La silla se ha liberado')
+                        return Response('La silla se ha liberado')    
                     return Response('La silla se encuentra en proceso de reserva o ya esta reservada')
 
                 silla_reservada = SillaReservada(

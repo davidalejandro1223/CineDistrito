@@ -82,25 +82,30 @@ class Pago(APIView):
         metodo_pago = request.data['v_metodopago']
         puntos_acumulados = cliente.i_numpuntos
 
-        factura = Factura()
-        info_factura = factura.calculo_factura(pk_reserva, cliente)
-        
-        if puntos_acumulados>100:
-            cliente.i_numpuntos=puntos_acumulados-100
-            cliente.save()
+        try:
+            factura = Factura()
+            info_factura = factura.calculo_factura(pk_reserva, cliente)
+            
+            if puntos_acumulados>100:
+                cliente.i_numpuntos=puntos_acumulados-100
+                cliente.save()
 
-        pago = Pago(
-            i_subtotalpago=info_factura['subtotal'],
-            i_totalpago=info_factura['total'],
-            i_puntosganados=info_factura['puntos_ganados'],
-            v_metodopago=metodo_pago,
-            fk_cliente=cliente,
-            fk_reserva=reserva
-        )
+            pago = Pago(
+                i_subtotalpago=info_factura['subtotal'],
+                i_totalpago=info_factura['total'],
+                i_puntosganados=info_factura['puntos_ganados'],
+                v_metodopago=metodo_pago,
+                fk_cliente=cliente,
+                fk_reserva=reserva
+            )
 
-        pago.save()
+            pago.save()
 
-        sillas = SillaReservada.objects.filter(fk_reserva=pk_reserva)
-        for silla in sillas:
-            silla.v_estado = 'reservada'
-            silla.save()
+            sillas = SillaReservada.objects.filter(fk_reserva=pk_reserva)
+            for silla in sillas:
+                silla.v_estado = 'reservada'
+                silla.save()
+            
+            return Response('El pago se ha realizado satisfactoriamente')
+        except:
+            return Response('Ha ocurrido un error con el pago, intentelo nuevamente')
