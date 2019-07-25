@@ -5,10 +5,11 @@ from empleados.models import Empleado
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from .models import Pago
 
 # Create your views here.
 
-class Factura(APIView):
+class FacturaView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk_reserva):
@@ -73,7 +74,7 @@ class Factura(APIView):
         }
 
 
-class Pago(APIView):
+class PagoView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, pk_reserva):
@@ -83,7 +84,7 @@ class Pago(APIView):
         puntos_acumulados = cliente.i_numpuntos
 
         try:
-            factura = Factura()
+            factura = FacturaView()
             info_factura = factura.calculo_factura(pk_reserva, cliente)
             
             if puntos_acumulados>100:

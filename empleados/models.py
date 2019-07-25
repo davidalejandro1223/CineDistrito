@@ -4,6 +4,7 @@ from multiplex.models import Multiplex
 from .managers import EmpleadoManager
 
 # Create your models here.
+
 class Contrato(models.Model):
     id = models.IntegerField(primary_key=True)
     v_tipocontrato = models.CharField(max_length=100)
